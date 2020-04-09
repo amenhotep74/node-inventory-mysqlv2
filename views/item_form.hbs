@@ -1,0 +1,34 @@
+<h1>{{title}}</h1>
+
+<form method="POST">
+    <label for="name">Name</label>
+    <input type="text" name="name" />
+
+    <br>
+
+    <label for="description">Description</label>
+    <input type="text" name="description" />
+
+    <br>
+
+    <label for="price">Price</label>
+    <input type="text" name="price" />
+
+    <br>
+
+    <label for="stock">Stock</label>
+    <input type="text" name="stock" />
+
+    <br>
+
+    <label for="categoryname">Category</label>
+    <select name="categoryname" type="select" placeholder="Select Category">
+        {{#each categorys}}
+        <option value="{{this.categoryname}}">{{this.categoryname}}</option>
+        {{/each}}
+    </select>
+
+    <br>
+
+    <button type="submit">Submit</button>
+</form>

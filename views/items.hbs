@@ -1,21 +1,28 @@
 <h1>Items</h1>
 <hr>
-<a href="/createitem">Add new item</a>
+<a href="items/create/">Add new item</a>
 <table border="1">
     <tr>
+        <th>id</th>
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
         <th>Stock</th>
-        <th>Category</th>
+        <th>Categoryname</th>
     </tr>
     {{#each items }}
     <tr>
+        <td>{{ this.id }}</td>
         <td>{{ this.name }}</td>
         <td>{{ this.description }}</td>
         <td>{{ this.price }}</td>
         <td>{{ this.stock }}</td>
-        <td>{{ this.category }}</td>
+        <td>{{ this.categoryname }}</td>
+        <td>
+            {{!-- Pass the name of the item clicked on so sql knows what to update --}}
+            <a href="update?id={{ this.id }}">Edit</a>
+            <a href="delete?id={{ this.id }}">Delete</a>
+        </td>
     </tr>
     {{/each}}
 </table>

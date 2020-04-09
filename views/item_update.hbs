@@ -1,0 +1,33 @@
+<h1>{{title}}</h1>
+
+<form method="POST">
+    <input type="hidden" name="id" value="{{ item.id }}" />
+
+    <label for="name">Name</label>
+    <input type="text" name="name" value="{{ item.name }}" />
+
+    <br>
+
+    <label for="description">Description</label>
+    <input type="text" name="description" value="{{ item.description }}" />
+
+    <br>
+
+    <label for="price">Price</label>
+    <input type="text" name="price" value="{{ item.price }}" />
+
+    <br>
+
+    <label for="stock">Stock</label>
+    <input type="text" name="stock" value="{{ item.stock }}" />
+
+    <br>
+
+    <label for="categoryname">Category (*item category cannot be changed once created)</label>
+    <select name="categoryname" type="select" placeholder="Select Category">
+        <option value="{{ item.categoryname }}">{{ item.categoryname }}</option>
+    </select>
+    <br>
+
+    <button type="submit">Submit</button>
+</form>

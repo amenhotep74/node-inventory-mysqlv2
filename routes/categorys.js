@@ -18,4 +18,15 @@ router.get('/', function (req, res, next) {
   });
 });
 
+// create category route
+router.get('/create', function (req, res, next) {
+  res.render('category_form', { title: 'Create new Category' });
+});
+
+router.post('/create', function (req, res, next) {
+  db.query('INSERT INTO categorys SET ?', req.body, function (err, rs) {
+    // Redirect to show all categorys page
+    res.redirect('/categorys');
+  });
+});
 module.exports = router;
