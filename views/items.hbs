@@ -20,8 +20,8 @@
         <td>{{ this.categoryname }}</td>
         <td>
             {{!-- Pass the name of the item clicked on so sql knows what to update --}}
-            <a href="update?id={{ this.id }}">Edit</a>
-            <a href="delete?id={{ this.id }}">Delete</a>
+            <a href="items/update?id={{ this.id }}">Edit</a>
+            <a href="items/delete?id={{ this.id }}">Delete</a>
         </td>
     </tr>
     {{/each}}

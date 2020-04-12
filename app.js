@@ -9,11 +9,27 @@ var usersRouter = require('./routes/users');
 var itemsRouter = require('./routes/items');
 var categorysRouter = require('./routes/categorys');
 
+const hbs = require('express-handlebars');
+const hbshelpers = require('handlebars-helpers');
+const multihelpers = hbshelpers();
+
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
+app.engine(
+  'hbs',
+  hbs({
+    helpers: multihelpers,
+    partialsDir: ['views/partials'],
+    extname: '.hbs',
+    layoutsDir: 'views',
+    defaultLayout: 'layout',
+  })
+);
+
 app.set('view engine', 'hbs');
+app.set('');
 
 app.use(logger('dev'));
 app.use(express.json());

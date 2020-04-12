@@ -30,7 +30,7 @@ router.get('/create', function (req, res, next) {
 // When create item form is submitted
 router.post('/create', function (req, res, next) {
   console.log(req.body);
-  db.query('INSERT INTO items SET ?', req.body, function (err, rs) {
+  db.query('INSERT INTO items SET ?', function (err, rs) {
     if (err) {
       console.log(err);
     }
@@ -39,26 +39,47 @@ router.post('/create', function (req, res, next) {
   });
 });
 
-// Update item get
+// Update item route
+// router.get('/update', function (req, res, next) {
+//   // Find the item what was clicked on in the data
+//   db.query('SELECT * FROM items WHERE id = ?', req.query.id, function (
+//     err,
+//     rs
+//   ) {
+//     res.render('item_update', {
+//       title: 'Update item',
+//       item: rs[0],
+//       categorys: grabCategorys(),
+//     });
+//   });
+// });
+
 router.get('/update', function (req, res, next) {
-  // Find the item record where the url id is the same as the url one
-  db.query('SELECT * FROM items WHERE id = ?', req.query.id, function (
-    err,
-    rs
-  ) {
-    // The first item returned in the array is the name of the item
-    res.render('item_update', { item: rs[0], title: 'Update Item' });
+  var sql = 'SELECT * from items WHERE id = ?; SELECT * from categorys';
+
+  db.query(sql, [req.query.id], async function (error, results, fields) {
+    if (error) {
+      throw error;
+    }
+    // Render the view
+    res.render('item_update', {
+      title: 'Update Item',
+      item: results[0][0],
+      categorys: results[1],
+    });
   });
 });
 
 router.post('/update', function (req, res, next) {
-  var param = [
-    req.body, // new record object to update with
-    req.query.id, // id of record to update in the database
-  ];
+  // req.body is the form output
+  // req.query.id is the id in the URL
+  var param = [req.body, req.query.id];
   db.query('UPDATE items SET ? WHERE id = ?', param, function (err, rs) {
+    if (err) {
+      console.log(err);
+    }
+    // Redirect to the show all items page
     res.redirect('/items');
-    console.log('Update record successful!');
   });
 });
 

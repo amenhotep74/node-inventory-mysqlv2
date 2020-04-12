@@ -29,4 +29,33 @@ router.post('/create', function (req, res, next) {
     res.redirect('/categorys');
   });
 });
+
+// update category route
+router.get('/update', function (req, res, next) {
+  // Find the category that was clicked on in the database from the url
+  db.query('SELECT * FROM categorys WHERE id = ?', req.query.id, function (
+    err,
+    rs
+  ) {
+    res.render('category_update', {
+      title: 'Update Category',
+      category: rs[0],
+    });
+  });
+});
+
+// Update form category route
+router.post('/update', function (req, res, next) {
+  console.log(req.body);
+  console.log(req.query.id);
+  var param = [req.body, req.query.id];
+  db.query('UPDATE categorys SET ? WHERE id = ?', param, function (err, rs) {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect('/categorys');
+    console.log('Category updated!');
+  });
+});
+
 module.exports = router;
