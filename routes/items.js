@@ -83,4 +83,30 @@ router.post('/update', function (req, res, next) {
   });
 });
 
+// Delete item route
+router.get('/delete', function (req, res, next) {
+  db.query('SELECT * FROM items WHERE id = ?', req.query.id, function (
+    err,
+    rs
+  ) {
+    console.log(rs[0]);
+    if (err) {
+      console.log(err);
+    }
+    res.render('item_delete', {
+      title: 'Delete Item',
+      item: rs[0],
+    });
+  });
+});
+
+router.post('/delete', function (req, res, next) {
+  db.query('DELETE FROM items WHERE id = ?', req.query.id, function (err, rs) {
+    if (err) {
+      res.redirect(`/items/delete?id=${req.query.id}`);
+    }
+    res.redirect('/items');
+  });
+});
+
 module.exports = router;
