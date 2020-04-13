@@ -58,4 +58,27 @@ router.post('/update', function (req, res, next) {
   });
 });
 
+// Delete routes
+router.get('/delete', function (req, res, next) {
+  db.query('SELECT * FROM categorys WHERE id = ?', req.query.id, function (
+    err,
+    rs
+  ) {
+    console.log(rs[0]);
+    res.render('category_delete', {
+      title: 'Delete Category',
+      category: rs[0],
+    });
+  });
+});
+
+router.post('/delete', function (req, res, next) {
+  db.query('DELETE FROM categorys WHERE id = ?', req.query.id, function (
+    err,
+    rs
+  ) {
+    res.redirect('/categorys');
+  });
+});
+
 module.exports = router;

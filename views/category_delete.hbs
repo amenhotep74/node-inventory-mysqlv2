@@ -1,0 +1,15 @@
+<h1>{{ title }}</h1>
+<p>Are you sure you want to delete this record?</p>
+<form method="POST">
+    <label for="id">id</label>
+    <input type="text" name="id" value={{category.id}} />
+
+    <br>
+
+    <label for="categoryname">CategoryName</label>
+    <input type="text" name="categoryname" value={{category.categoryname}} />
+
+    <br>
+
+    <button type="submit">Submit</button>
+</form>
